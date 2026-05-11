@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Watterson Family Universe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <h1 class="loading-text">Welcome to Elmore!</h1>
+            <div class="loading-animations">
+                <div class="bounce-bubble">🌟</div>
+                <div class="bounce-bubble">✨</div>
+                <div class="bounce-bubble">🎉</div>
+            </div>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bg-music" loop>
+        <source src="assets/sounds/background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Background Elements -->
+    <div class="background-elements">
+        <div class="floating-cloud cloud-1"></div>
+        <div class="floating-cloud cloud-2"></div>
+        <div class="floating-star star-1"></div>
+        <div class="floating-star star-2"></div>
+        <div class="floating-doodle doodle-1"></div>
+        <div class="floating-doodle doodle-2"></div>
+    </div>
+
+    <!-- Music Toggle -->
+    <button id="music-toggle" class="music-toggle">
+        <span>🎵</span>
+    </button>
+
+    <!-- Page Container -->
+    <div id="page-container">
+
+        <!-- HOME PAGE -->
+        <section id="home-page" class="page active">
+            <div class="home-content">
+                <h1 class="main-title">
+                    <span class="title-wobble">The Watterson Family</span>
+                    <br>
+                    <span class="title-glow">Universe</span>
+                </h1>
+                <p class="subtitle">
+                    Chaos, friendship, intelligence, laziness, and pure Elmore energy ✨
+                </p>
+
+                <div class="intro-animation">
+                    <div class="family-intro">
+                        <div class="intro-char gumball-intro" data-character="gumball">
+                            <img src="assets/characters/gumball.jpg" alt="Gumball" class="intro-img">
+                            <span class="char-name">Gumball</span>
+                        </div>
+                        <div class="intro-char darwin-intro" data-character="darwin">
+                            <img src="assets/characters/darwin.jpg" alt="Darwin" class="intro-img">
+                            <span class="char-name">Darwin</span>
+                        </div>
+                        <div class="intro-char anais-intro" data-character="anais">
+                            <img src="assets/characters/anais-smart.jpg" alt="Anais" class="intro-img">
+                            <span class="char-name">Anais</span>
+                        </div>
+                        <div class="intro-char nicole-intro" data-character="nicole">
+                            <img src="assets/characters/nicole.jpg" alt="Nicole" class="intro-img">
+                            <span class="char-name">Nicole</span>
+                        </div>
+                        <div class="intro-char richard-intro" data-character="richard">
+                            <img src="assets/characters/richard.jpg" alt="Richard" class="intro-img">
+                            <span class="char-name">Richard</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-buttons">
+                    <button class="btn-primary btn-bounce" onclick="showPage('family-page')">
+                        🏠 Meet the Family
+                    </button>
+                    <button class="btn-secondary btn-shake" onclick="showPage('quiz-page')">
+                        🧠 Test Your Gumball Knowledge
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- WATTERSON FAMILY PAGE -->
+        <section id="family-page" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Meet the Watterson Family</h1>
+                <button class="back-btn" onclick="showPage('home-page')">← Back Home</button>
+            </div>
+
+            <div class="character-grid">
+                <!-- Gumball Card -->
+                <div class="char-card gumball-card" data-character="gumball">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/gumball.jpg" alt="Gumball" class="char-image">
+                            <div class="char-glow gumball-glow"></div>
+                        </div>
+                        <h2 class="char-name">Gumball Watterson</h2>
+                        <div class="traits-container">
+                            <span class="trait">🌀 Chaotic</span>
+                            <span class="trait">😄 Funny</span>
+                            <span class="trait">🎭 Dramatic</span>
+                            <span class="trait">💖 Loyal Friend</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('gumball')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects gumball-effects">
+                        <div class="sparkle sparkle-1"></div>
+                        <div class="sparkle sparkle-2"></div>
+                    </div>
+                </div>
+
+                <!-- Darwin Card -->
+                <div class="char-card darwin-card" data-character="darwin">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/darwin.jpg" alt="Darwin" class="char-image">
+                            <div class="char-glow darwin-glow"></div>
+                        </div>
+                        <h2 class="char-name">Darwin Watterson</h2>
+                        <div class="traits-container">
+                            <span class="trait">💕 Kind-hearted</span>
+                            <span class="trait">😊 Innocent</span>
+                            <span class="trait">🧠 Emotional Intelligence</span>
+                            <span class="trait">🧭 Moral Compass</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('darwin')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects darwin-effects">
+                        <div class="bubble bubble-1">💭</div>
+                        <div class="bubble bubble-2">🫧</div>
+                    </div>
+                </div>
+
+                <!-- Anais Card -->
+                <div class="char-card anais-card" data-character="anais">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/anais-smart.jpg" alt="Anais" class="char-image">
+                            <div class="char-glow anais-glow"></div>
+                        </div>
+                        <h2 class="char-name">Anais Watterson</h2>
+                        <div class="traits-container">
+                            <span class="trait">🧠 Genius</span>
+                            <span class="trait">🔬 Strategic Thinker</span>
+                            <span class="trait">😈 Secretly Evil</span>
+                            <span class="trait">📚 The Brain</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('anais')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects anais-effects">
+                        <div class="equation eq-1">E=mc²</div>
+                        <div class="equation eq-2">∫f(x)</div>
+                    </div>
+                </div>
+
+                <!-- Nicole Card -->
+                <div class="char-card nicole-card" data-character="nicole">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/nicole.jpg" alt="Nicole" class="char-image">
+                            <div class="char-glow nicole-glow"></div>
+                        </div>
+                        <h2 class="char-name">Nicole Watterson</h2>
+                        <div class="traits-container">
+                            <span class="trait">💪 Hardworking</span>
+                            <span class="trait">😠 Scary When Angry</span>
+                            <span class="trait">🛡️ Protective</span>
+                            <span class="trait">🏆 Perfectionist</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('nicole')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects nicole-effects">
+                        <div class="rage-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Richard Card -->
+                <div class="char-card richard-card" data-character="richard">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/richard.jpg" alt="Richard" class="char-image">
+                            <div class="char-glow richard-glow"></div>
+                        </div>
+                        <h2 class="char-name">Richard Watterson</h2>
+                        <div class="traits-container">
+                            <span class="trait">😴 Lazy</span>
+                            <span class="trait">🤪 Dumb but Lovable</span>
+                            <span class="trait">🍕 Loves Food</span>
+                            <span class="trait">❤️ Caring Father</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('richard')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects richard-effects">
+                        <div class="food-drop food-1">🍕</div>
+                        <div class="food-drop food-2">🍔</div>
+                    </div>
+                </div>
+
+                <!-- Granny Jojo Card -->
+                <div class="char-card jojo-card" data-character="jojo">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/jojo.jpg" alt="Granny Jojo" class="char-image">
+                            <div class="char-glow jojo-glow"></div>
+                        </div>
+                        <h2 class="char-name">Granny Jojo</h2>
+                        <div class="traits-container">
+                            <span class="trait">🎩 Weird</span>
+                            <span class="trait">😂 Funny</span>
+                            <span class="trait">🎲 Unpredictable</span>
+                            <span class="trait">👵 Grandma Energy</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('jojo')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects jojo-effects">
+                        <div class="tv-glitch"></div>
+                    </div>
+                </div>
+
+                <!-- Penny Card -->
+                <div class="char-card penny-card" data-character="penny">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/penny.jpg" alt="Penny" class="char-image">
+                            <div class="char-glow penny-glow"></div>
+                        </div>
+                        <h2 class="char-name">Penny Fitzgerald</h2>
+                        <div class="traits-container">
+                            <span class="trait">💖 Sweet</span>
+                            <span class="trait">💕 Gumball's Love</span>
+                            <span class="trait">🦋 Shape-shifter</span>
+                            <span class="trait">😊 Shy but Powerful</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('penny')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects penny-effects">
+                        <div class="heart-particle heart-1">💕</div>
+                        <div class="heart-particle heart-2">💗</div>
+                    </div>
+                </div>
+
+                <!-- Carrie Card -->
+                <div class="char-card carrie-card" data-character="carrie">
+                    <div class="card-border">
+                        <div class="char-image-container">
+                            <img src="assets/characters/carrie.jpg" alt="Carrie" class="char-image">
+                            <div class="char-glow carrie-glow"></div>
+                        </div>
+                        <h2 class="char-name">Carrie Krueger</h2>
+                        <div class="traits-container">
+                            <span class="trait">👻 Goth Ghost</span>
+                            <span class="trait">😏 Sarcastic</span>
+                            <span class="trait">😌 Calm</span>
+                            <span class="trait">💭 Emotionally Intelligent</span>
+                        </div>
+                        <button class="details-btn" onclick="showCharacterDetails('carrie')">
+                            Learn More →
+                        </button>
+                    </div>
+                    <div class="card-effects carrie-effects">
+                        <div class="ghost-float"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ PAGE -->
+        <section id="quiz-page" class="page">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <button class="back-btn" onclick="showPage('home-page')">← Back</button>
+                    <h1 class="quiz-title">Gumball Knowledge Quiz</h1>
+                    <div class="quiz-stats">
+                        <span id="score-display">Score: 0</span>
+                        <span id="combo-display">Combo: x1</span>
+                    </div>
+                </div>
+
+                <div id="quiz-start" class="quiz-start">
+                    <h2>Ready to test your knowledge?</h2>
+                    <p>Choose your difficulty:</p>
+                    <div class="difficulty-buttons">
+                        <button class="difficulty-btn easy" onclick="startQuiz('easy')">
+                            🌱 Easy
+                        </button>
+                        <button class="difficulty-btn chaos" onclick="startQuiz('chaos')">
+                            🌀 Chaos
+                        </button>
+                        <button class="difficulty-btn nightmare" onclick="startQuiz('nightmare')">
+                            👹 Elmore Nightmare
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-game" class="quiz-game hidden">
+                    <div class="timer-bar">
+                        <div id="timer-progress" class="timer-progress"></div>
+                    </div>
+                    <div class="question-container">
+                        <h2 id="question-text" class="question-text"></h2>
+                        <div id="answer-options" class="answer-options"></div>
+                    </div>
+                    <div class="question-counter">
+                        Question <span id="current-q">1</span> of <span id="total-q">15</span>
+                    </div>
+                </div>
+
+                <div id="quiz-result" class="quiz-result hidden">
+                    <div class="result-card">
+                        <h2 id="result-title" class="result-title"></h2>
+                        <div id="result-score" class="result-score"></div>
+                        <p id="result-message" class="result-message"></p>
+                        <div id="character-reaction" class="character-reaction">
+                            <img id="reaction-image" src="" alt="" class="reaction-image">
+                            <p id="reaction-text" class="reaction-text"></p>
+                        </div>
+                        <div class="result-buttons">
+                            <button class="btn-primary" onclick="showPage('home-page')">
+                                🏠 Back Home
+                            </button>
+                            <button class="btn-secondary" onclick="restartQuiz()">
+                                🔄 Play Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- CHARACTER DETAILS MODAL -->
+    <div class="details-container">
+        <button class="close-details" onclick="closeCharacterDetails()">✕</button>
+        <div class="details-content">
+            <div class="details-image-section">
+                <img id="detail-image" src="" alt="" class="detail-main-image">
+                <div id="detail-glow" class="detail-glow"></div>
+            </div>
+            <div class="details-info">
+                <h1 id="detail-name" class="detail-name"></h1>
+                <p id="detail-bio" class="detail-bio"></p>
+
+                <div class="detail-section">
+                    <h3>Personality Analysis</h3>
+                    <p id="detail-personality" class="detail-text"></p>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Fun Facts</h3>
+                    <ul id="detail-facts" class="detail-facts"></ul>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Favorite Quotes</h3>
+                    <div id="detail-quotes" class="detail-quotes"></div>
+                </div>
+
+                <div class="mood-buttons">
+                    <h3>Mood Mode</h3>
+                    <button class="mood-btn happy" onclick="setMood('happy')">😊 Happy</button>
+                    <button class="mood-btn chaotic" onclick="setMood('chaotic')">🌀 Chaotic</button>
+                    <button class="mood-btn dramatic" onclick="setMood('dramatic')">🎭 Dramatic</button>
+                </div>
+
+                <div class="detail-media">
+                    <h3>Character Moments</h3>
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <img id="detail-gif" src="" alt="" class="detail-gif">
+                        </div>
+                        <video id="detail-video" controls class="detail-video">
+                            <source src="" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

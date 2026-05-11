@@ -1,0 +1,40 @@
+# Ignore large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.gif
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mp3
+*.wav
+*.ogg
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore node modules (if using npm)
+node_modules/
+
+# Ignore build outputs
+dist/
+build/
+
+# Keep documentation files
+!README.md
+!QUICKSTART.md
+!assets/README.md
+!assets/characters/README.md
+!assets/sounds/README.md
+!assets/videos/README.md
