@@ -18,10 +18,10 @@ const characters = {
             '"Darwin, you\'re the best brother ever!"',
             '"Why does everything bad happen to me?"'
         ],
-        image: "assets/characters/gumball.jpg",
-        gif: "assets/characters/gumball-action.gif",
-        video: "assets/videos/gumball-moment.mp4",
-        sound: "assets/sounds/gumball.mp3",
+        image: "./assets/characters/gumball.jpg",
+        gif: "./assets/characters/gumball-action.gif",
+        video: "./assets/videos/gumball-moment.mp4",
+        sound: "./assets/sounds/gumball.mp3",
         colors: {
             primary: "#00BFFF",
             secondary: "#1E90FF"
@@ -45,10 +45,10 @@ const characters = {
             '"We can do this together!"',
             '"Why can\'t we all just get along?"'
         ],
-        image: "assets/characters/darwin.jpg",
-        gif: "assets/characters/darwin-cute.gif",
-        video: "assets/videos/darwin-moment.mp4",
-        sound: "assets/sounds/darwin.mp3",
+        image: "./assets/characters/darwin.jpg",
+        gif: "./assets/characters/darwin-cute.gif",
+        video: "./assets/videos/darwin-moment.mp4",
+        sound: "./assets/sounds/darwin.mp3",
         colors: {
             primary: "#FFA500",
             secondary: "#FF8C00"
@@ -72,10 +72,10 @@ const characters = {
             '"I\'m not bossy, I\'m just always right."',
             '"Simple minds, simple problems."'
         ],
-        image: "assets/characters/anais-smart.jpg",
-        gif: "assets/characters/anais-thinking.gif",
-        video: "assets/videos/anais-moment.mp4",
-        sound: "assets/sounds/anais.mp3",
+        image: "./assets/characters/anais-smart.jpg",
+        gif: "./assets/characters/anais-thinking.gif",
+        video: "./assets/videos/anais-moment.mp4",
+        sound: "./assets/sounds/anais.mp3",
         colors: {
             primary: "#FF69B4",
             secondary: "#FF1493"
@@ -99,10 +99,10 @@ const characters = {
             '"I do everything for this family!"',
             '"Don\'t make me come over there!"'
         ],
-        image: "assets/characters/nicole.jpg",
-        gif: "assets/characters/nicole-angry.gif",
-        video: "assets/videos/nicole-moment.mp4",
-        sound: "assets/sounds/nicole.mp3",
+        image: "./assets/characters/nicole.jpg",
+        gif: "./assets/characters/nicole-angry.gif",
+        video: "./assets/videos/nicole-moment.mp4",
+        sound: "./assets/sounds/nicole.mp3",
         colors: {
             primary: "#FF4500",
             secondary: "#DC143C"
@@ -126,10 +126,10 @@ const characters = {
             '"I don\'t understand any of this."',
             '"That sounds like too much work."'
         ],
-        image: "assets/characters/richard.jpg",
-        gif: "assets/characters/richard-eating.gif",
-        video: "assets/videos/richard-moment.mp4",
-        sound: "assets/sounds/richard.mp3",
+        image: "./assets/characters/richard.jpg",
+        gif: "./assets/characters/richard-eating.gif",
+        video: "./assets/videos/richard-moment.mp4",
+        sound: "./assets/sounds/richard.mp3",
         colors: {
             primary: "#FFD700",
             secondary: "#FFA500"
@@ -153,10 +153,10 @@ const characters = {
             '"Don\'t ask me how I know this."',
             '"That reminds me of the time I..."'
         ],
-        image: "assets/characters/jojo.jpg",
-        gif: "assets/characters/jojo-weird.gif",
-        video: "assets/videos/jojo-moment.mp4",
-        sound: "assets/sounds/jojo.mp3",
+        image: "./assets/characters/jojo.jpg",
+        gif: "./assets/characters/jojo-weird.gif",
+        video: "./assets/videos/jojo-moment.mp4",
+        sound: "./assets/sounds/jojo.mp3",
         colors: {
             primary: "#9370DB",
             secondary: "#8A2BE2"
@@ -180,10 +180,10 @@ const characters = {
             '"This is who I really am."',
             '"We can face anything together."'
         ],
-        image: "assets/characters/penny.jpg",
-        gif: "assets/characters/penny-shapeshift.gif",
-        video: "assets/videos/penny-moment.mp4",
-        sound: "assets/sounds/penny.mp3",
+        image: "./assets/characters/penny.jpg",
+        gif: "./assets/characters/penny-shapeshift.gif",
+        video: "./assets/videos/penny-moment.mp4",
+        sound: "./assets/sounds/penny.mp3",
         colors: {
             primary: "#FF1493",
             secondary: "#FF69B4"
@@ -207,10 +207,10 @@ const characters = {
             '"I\'ve seen worse."',
             '"Life is temporary, but style is eternal."'
         ],
-        image: "assets/characters/carrie.jpg",
-        gif: "assets/characters/carrie-float.gif",
-        video: "assets/videos/carrie-moment.mp4",
-        sound: "assets/sounds/carrie.mp3",
+        image: "./assets/characters/carrie.jpg",
+        gif: "./assets/characters/carrie-float.gif",
+        video: "./assets/videos/carrie-moment.mp4",
+        sound: "./assets/sounds/carrie.mp3",
         colors: {
             primary: "#9932CC",
             secondary: "#8B008B"
