@@ -557,9 +557,13 @@ function initializeMusicToggle() {
     bgMusic.volume = 0.8;
     bgMusic.load();
     
+    // Prevent rapid double-clicks
+    let isTransitioning = false;
+    
     // Add error handling
     bgMusic.addEventListener('error', (e) => {
         console.error('Background music error:', e);
+        isTransitioning = false;
     });
     
     bgMusic.addEventListener('loadeddata', () => {
@@ -577,27 +581,37 @@ function initializeMusicToggle() {
     
     bgMusic.addEventListener('ended', () => {
         musicToggle.innerHTML = '<span>🔇</span>';
+        isTransitioning = false;
     });
 
     musicToggle.addEventListener('click', () => {
         playSound('click');
+        
+        // Prevent rapid clicks
+        if (isTransitioning) {
+            console.log('Audio is transitioning, ignoring click');
+            return;
+        }
+        
+        isTransitioning = true;
 
-        // Check actual audio state instead of tracking variable
+        // Check actual audio state
         if (bgMusic.paused || bgMusic.ended) {
             // Audio is paused or ended, try to play
-            const playPromise = bgMusic.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('Background music playing');
-                }).catch((err) => {
-                    console.error('Failed to play background music:', err);
-                    // Update icon to reflect actual state
-                    musicToggle.innerHTML = '<span>🔇</span>';
-                });
-            }
+            console.log('Attempting to play background music');
+            bgMusic.play().then(() => {
+                console.log('Background music playing');
+                isTransitioning = false;
+            }).catch((err) => {
+                console.error('Failed to play background music:', err);
+                isTransitioning = false;
+                musicToggle.innerHTML = '<span>🔇</span>';
+            });
         } else {
             // Audio is playing, pause it
+            console.log('Pausing background music');
             bgMusic.pause();
+            isTransitioning = false;
         }
     });
 }
