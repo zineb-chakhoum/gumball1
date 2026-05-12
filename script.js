@@ -181,7 +181,6 @@ const characters = {
             '"We can face anything together."'
         ],
         image: "./assets/characters/penny.jpg",
-        gif: "./assets/characters/penny-shapeshift.gif",
         video: "./assets/videos/penny-moment.mp4",
         sound: "./assets/sounds/penny.mp3",
         colors: {
@@ -466,7 +465,16 @@ function showCharacterDetails(characterId) {
     document.getElementById('detail-personality').textContent = character.personality;
     document.getElementById('detail-image').src = character.image;
     document.getElementById('detail-image').alt = character.name;
-    document.getElementById('detail-gif').src = character.gif;
+
+    // Handle optional GIF
+    const gifElement = document.getElementById('detail-gif');
+    if (character.gif) {
+        gifElement.src = character.gif;
+        gifElement.style.display = 'block';
+    } else {
+        gifElement.style.display = 'none';
+    }
+
     const video = document.getElementById('detail-video');
     video.querySelector('source').src = character.video;
     video.load();
