@@ -554,7 +554,7 @@ function initializeMusicToggle() {
     const bgMusic = document.getElementById('bg-music');
     
     // Set initial volume and load the audio
-    bgMusic.volume = 0.3;
+    bgMusic.volume = 0.8;
     bgMusic.load();
     
     // Add error handling
