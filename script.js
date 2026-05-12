@@ -557,13 +557,31 @@ function initializeMusicToggle() {
     bgMusic.volume = 0.8;
     bgMusic.load();
     
-    // Prevent rapid double-clicks
+    // Prevent rapid double-clicks with a timeout safety
     let isTransitioning = false;
+    let transitionTimeout = null;
+    
+    function resetTransition() {
+        isTransitioning = false;
+        if (transitionTimeout) {
+            clearTimeout(transitionTimeout);
+            transitionTimeout = null;
+        }
+    }
+    
+    function setTransition() {
+        isTransitioning = true;
+        // Safety timeout to reset lock if something goes wrong
+        transitionTimeout = setTimeout(() => {
+            console.log('Resetting transition lock (timeout safety)');
+            resetTransition();
+        }, 1000);
+    }
     
     // Add error handling
     bgMusic.addEventListener('error', (e) => {
         console.error('Background music error:', e);
-        isTransitioning = false;
+        resetTransition();
     });
     
     bgMusic.addEventListener('loadeddata', () => {
@@ -581,7 +599,6 @@ function initializeMusicToggle() {
     
     bgMusic.addEventListener('ended', () => {
         musicToggle.innerHTML = '<span>🔇</span>';
-        isTransitioning = false;
     });
 
     musicToggle.addEventListener('click', () => {
@@ -593,7 +610,7 @@ function initializeMusicToggle() {
             return;
         }
         
-        isTransitioning = true;
+        setTransition();
 
         // Check actual audio state
         if (bgMusic.paused || bgMusic.ended) {
@@ -601,17 +618,17 @@ function initializeMusicToggle() {
             console.log('Attempting to play background music');
             bgMusic.play().then(() => {
                 console.log('Background music playing');
-                isTransitioning = false;
+                resetTransition();
             }).catch((err) => {
                 console.error('Failed to play background music:', err);
-                isTransitioning = false;
                 musicToggle.innerHTML = '<span>🔇</span>';
+                resetTransition();
             });
         } else {
             // Audio is playing, pause it
             console.log('Pausing background music');
             bgMusic.pause();
-            isTransitioning = false;
+            resetTransition();
         }
     });
 }
