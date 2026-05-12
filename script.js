@@ -647,6 +647,16 @@ function getAudioContext() {
     if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
+    
+    // Resume AudioContext if it's suspended (required by browsers)
+    if (audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+            console.log('AudioContext resumed');
+        }).catch((err) => {
+            console.error('Failed to resume AudioContext:', err);
+        });
+    }
+    
     return audioContext;
 }
 
