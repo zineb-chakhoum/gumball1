@@ -18,10 +18,10 @@ const characters = {
             '"Darwin, you\'re the best brother ever!"',
             '"Why does everything bad happen to me?"'
         ],
-        image: "./assets/characters/gumball.jpg",
-        gif: "./assets/characters/gumball-action.gif",
-        video: "./assets/videos/gumball-moment.mp4",
-        sound: "./assets/sounds/gumball.mp3",
+        image: "assets/characters/gumball.jpg",
+        gif: "assets/characters/gumball-action.gif",
+        video: "assets/videos/gumball-moment.mp4",
+        sound: "assets/sounds/gumball.mp3",
         colors: {
             primary: "#00BFFF",
             secondary: "#1E90FF"
@@ -45,10 +45,10 @@ const characters = {
             '"We can do this together!"',
             '"Why can\'t we all just get along?"'
         ],
-        image: "./assets/characters/darwin.jpg",
-        gif: "./assets/characters/darwin-cute.gif",
-        video: "./assets/videos/darwin-moment.mp4",
-        sound: "./assets/sounds/darwin.mp3",
+        image: "assets/characters/darwin.jpg",
+        gif: "assets/characters/darwin-cute.gif",
+        video: "assets/videos/darwin-moment.mp4",
+        sound: "assets/sounds/darwin.mp3",
         colors: {
             primary: "#FFA500",
             secondary: "#FF8C00"
@@ -72,10 +72,10 @@ const characters = {
             '"I\'m not bossy, I\'m just always right."',
             '"Simple minds, simple problems."'
         ],
-        image: "./assets/characters/anais-smart.jpg",
-        gif: "./assets/characters/anais-thinking.gif",
-        video: "./assets/videos/anais-moment.mp4",
-        sound: "./assets/sounds/anais.mp3",
+        image: "assets/characters/anais-smart.jpg",
+        gif: "assets/characters/anais-thinking.gif",
+        video: "assets/videos/anais-moment.mp4",
+        sound: "assets/sounds/anais.mp3",
         colors: {
             primary: "#FF69B4",
             secondary: "#FF1493"
@@ -99,10 +99,10 @@ const characters = {
             '"I do everything for this family!"',
             '"Don\'t make me come over there!"'
         ],
-        image: "./assets/characters/nicole.jpg",
-        gif: "./assets/characters/nicole-angry.gif",
-        video: "./assets/videos/nicole-moment.mp4",
-        sound: "./assets/sounds/nicole.mp3",
+        image: "assets/characters/nicole.jpg",
+        gif: "assets/characters/nicole-angry.gif",
+        video: "assets/videos/nicole-moment.mp4",
+        sound: "assets/sounds/nicole.mp3",
         colors: {
             primary: "#FF4500",
             secondary: "#DC143C"
@@ -126,10 +126,10 @@ const characters = {
             '"I don\'t understand any of this."',
             '"That sounds like too much work."'
         ],
-        image: "./assets/characters/richard.jpg",
-        gif: "./assets/characters/richard-eating.gif",
-        video: "./assets/videos/richard-moment.mp4",
-        sound: "./assets/sounds/richard.mp3",
+        image: "assets/characters/richard.jpg",
+        gif: "assets/characters/richard-eating.gif",
+        video: "assets/videos/richard-moment.mp4",
+        sound: "assets/sounds/richard.mp3",
         colors: {
             primary: "#FFD700",
             secondary: "#FFA500"
@@ -153,10 +153,10 @@ const characters = {
             '"Don\'t ask me how I know this."',
             '"That reminds me of the time I..."'
         ],
-        image: "./assets/characters/jojo.jpg",
-        gif: "./assets/characters/jojo-weird.gif",
-        video: "./assets/videos/jojo-moment.mp4",
-        sound: "./assets/sounds/jojo.mp3",
+        image: "assets/characters/jojo.jpg",
+        gif: "assets/characters/jojo-weird.gif",
+        video: "assets/videos/jojo-moment.mp4",
+        sound: "assets/sounds/jojo.mp3",
         colors: {
             primary: "#9370DB",
             secondary: "#8A2BE2"
@@ -180,9 +180,9 @@ const characters = {
             '"This is who I really am."',
             '"We can face anything together."'
         ],
-        image: "./assets/characters/penny.jpg",
-        video: "./assets/videos/penny-moment.mp4",
-        sound: "./assets/sounds/penny.mp3",
+        image: "assets/characters/penny.jpg",
+        video: "assets/videos/penny-moment.mp4",
+        sound: "assets/sounds/penny.mp3",
         colors: {
             primary: "#FF1493",
             secondary: "#FF69B4"
@@ -206,10 +206,10 @@ const characters = {
             '"I\'ve seen worse."',
             '"Life is temporary, but style is eternal."'
         ],
-        image: "./assets/characters/carrie.jpg",
-        gif: "./assets/characters/carrie-float.gif",
-        video: "./assets/videos/carrie-moment.mp4",
-        sound: "./assets/sounds/carrie.mp3",
+        image: "assets/characters/carrie.jpg",
+        gif: "assets/characters/carrie-float.gif",
+        video: "assets/videos/carrie-moment.mp4",
+        sound: "assets/sounds/carrie.mp3",
         colors: {
             primary: "#9932CC",
             secondary: "#8B008B"
@@ -506,6 +506,10 @@ function showCharacterDetails(characterId) {
 
 function closeCharacterDetails() {
     console.log('Closing character details');
+    
+    // Stop character sound when closing modal
+    stopCharacterSound();
+    
     playSound('click');
     const modal = document.querySelector('.details-container');
     if (modal) {
@@ -548,6 +552,20 @@ function setMood(mood) {
 function initializeMusicToggle() {
     const musicToggle = document.getElementById('music-toggle');
     const bgMusic = document.getElementById('bg-music');
+    
+    // Set initial volume and load the audio
+    bgMusic.volume = 0.3;
+    bgMusic.load();
+    
+    // Add error handling
+    bgMusic.addEventListener('error', (e) => {
+        console.error('Background music error:', e);
+    });
+    
+    bgMusic.addEventListener('loadeddata', () => {
+        console.log('Background music loaded successfully');
+    });
+    
     let isPlaying = false;
 
     musicToggle.addEventListener('click', () => {
@@ -557,8 +575,10 @@ function initializeMusicToggle() {
             bgMusic.pause();
             musicToggle.innerHTML = '<span>🔇</span>';
         } else {
-            bgMusic.play().catch(() => {
-                // Audio might not be available
+            bgMusic.play().then(() => {
+                console.log('Background music playing');
+            }).catch((err) => {
+                console.error('Failed to play background music:', err);
             });
             musicToggle.innerHTML = '<span>🎵</span>';
         }
@@ -569,6 +589,13 @@ function initializeMusicToggle() {
 
 // AUDIO CONTEXT FOR UI SOUND GENERATION
 let audioContext = null;
+
+// TRACK CURRENT CHARACTER SOUND
+let currentCharacterSound = null;
+
+// SOUND QUEUE TO PREVENT OVERLAPPING UI SOUNDS
+let isPlayingSound = false;
+let soundQueue = [];
 
 function getAudioContext() {
     if (!audioContext) {
@@ -651,17 +678,39 @@ function generateSound(type) {
     }
 }
 
-// SOUND EFFECTS (UI SOUNDS ONLY)
+// SOUND EFFECTS (UI SOUNDS ONLY) - WITH QUEUE SYSTEM
 function playSound(type) {
+    soundQueue.push(type);
+    processSoundQueue();
+}
+
+function processSoundQueue() {
+    if (isPlayingSound || soundQueue.length === 0) {
+        return;
+    }
+    
+    isPlayingSound = true;
+    const type = soundQueue.shift();
+    
     try {
         generateSound(type);
+        // Simple delay to prevent overlapping sounds
+        setTimeout(() => {
+            isPlayingSound = false;
+            processSoundQueue();
+        }, 100);
     } catch (e) {
         console.log('Sound generation failed:', e);
+        isPlayingSound = false;
+        processSoundQueue();
     }
 }
 
 // PLAY CHARACTER SOUND FROM MP3 FILE
 function playCharacterSound(characterId) {
+    // Stop any existing character sound
+    stopCharacterSound();
+    
     const character = characters[characterId];
     if (character && character.sound) {
         const audio = new Audio(character.sound);
@@ -669,6 +718,16 @@ function playCharacterSound(characterId) {
         audio.play().catch(() => {
             // Audio might not be available, that's okay
         });
+        currentCharacterSound = audio;
+    }
+}
+
+// STOP CURRENT CHARACTER SOUND
+function stopCharacterSound() {
+    if (currentCharacterSound) {
+        currentCharacterSound.pause();
+        currentCharacterSound.currentTime = 0;
+        currentCharacterSound = null;
     }
 }
 
