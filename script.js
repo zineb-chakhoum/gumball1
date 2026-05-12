@@ -566,24 +566,39 @@ function initializeMusicToggle() {
         console.log('Background music loaded successfully');
     });
     
-    let isPlaying = false;
+    // Update button icon based on actual audio state
+    bgMusic.addEventListener('play', () => {
+        musicToggle.innerHTML = '<span>🎵</span>';
+    });
+    
+    bgMusic.addEventListener('pause', () => {
+        musicToggle.innerHTML = '<span>🔇</span>';
+    });
+    
+    bgMusic.addEventListener('ended', () => {
+        musicToggle.innerHTML = '<span>🔇</span>';
+    });
 
     musicToggle.addEventListener('click', () => {
         playSound('click');
 
-        if (isPlaying) {
-            bgMusic.pause();
-            musicToggle.innerHTML = '<span>🔇</span>';
+        // Check actual audio state instead of tracking variable
+        if (bgMusic.paused || bgMusic.ended) {
+            // Audio is paused or ended, try to play
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Background music playing');
+                }).catch((err) => {
+                    console.error('Failed to play background music:', err);
+                    // Update icon to reflect actual state
+                    musicToggle.innerHTML = '<span>🔇</span>';
+                });
+            }
         } else {
-            bgMusic.play().then(() => {
-                console.log('Background music playing');
-            }).catch((err) => {
-                console.error('Failed to play background music:', err);
-            });
-            musicToggle.innerHTML = '<span>🎵</span>';
+            // Audio is playing, pause it
+            bgMusic.pause();
         }
-
-        isPlaying = !isPlaying;
     });
 }
 
