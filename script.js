@@ -1,4 +1,20 @@
 // CHARACTER DATA WITH TRAITS AND MEDIA
+// MOBILE DETECTION AND PERFORMANCE OPTIMIZATION
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 'ontouchstart' in window;
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+// Throttle function for performance
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
 const characters = {
     gumball: {
         name: "Gumball Watterson",
@@ -369,13 +385,17 @@ function initializeLoadingScreen() {
     }, 3000);
 }
 
-// CURSOR TRAIL EFFECT
+// CURSOR TRAIL EFFECT (DISABLED ON MOBILE FOR PERFORMANCE)
 function initializeCursorTrail() {
-    document.addEventListener('mousemove', (e) => {
+    if (isMobile || isTouchDevice) {
+        return;
+    }
+
+    document.addEventListener('mousemove', throttle((e) => {
         if (Math.random() > 0.7) {
             createTrail(e.clientX, e.clientY);
         }
-    });
+    }, 50), { passive: true });
 }
 
 function createTrail(x, y) {
@@ -1003,11 +1023,12 @@ function restartQuiz() {
     document.getElementById('quiz-start').classList.remove('hidden');
 }
 
-// CONFETTI EFFECT
+// CONFETTI EFFECT (REDUCED PARTICLES ON MOBILE)
 function createConfetti() {
     const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA500', '#FF69B4', '#9370DB'];
+    const particleCount = isMobile ? 20 : 50;
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < particleCount; i++) {
         const confetti = document.createElement('div');
         confetti.style.position = 'fixed';
         confetti.style.width = '10px';
@@ -1030,7 +1051,7 @@ function createConfetti() {
     }
 }
 
-// EASTER EGGS
+// EASTER EGGS (RANDOM POPUPS DISABLED ON MOBILE)
 function initializeEasterEggs() {
     let konamiCode = [];
     const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -1044,12 +1065,14 @@ function initializeEasterEggs() {
         }
     });
 
-    // Random character popups
-    setInterval(() => {
-        if (Math.random() > 0.95) {
-            showRandomCharacterPopup();
-        }
-    }, 10000);
+    // Random character popups (disabled on mobile for better UX)
+    if (!isMobile && !isTouchDevice) {
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                showRandomCharacterPopup();
+            }
+        }, 10000);
+    }
 }
 
 function activateSecretMode() {
@@ -1183,12 +1206,12 @@ let touchEndX = 0;
 
 document.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
-});
+}, { passive: true });
 
 document.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
     handleSwipe();
-});
+}, { passive: true });
 
 function handleSwipe() {
     const swipeThreshold = 50;
