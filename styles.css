@@ -893,9 +893,12 @@ button, .btn-primary, .btn-secondary, .details-btn, .difficulty-btn, .answer-btn
     max-width: 900px;
     max-height: 90vh;
     overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     border: 4px solid white;
     box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 .details-image-section {
@@ -1318,12 +1321,18 @@ button, .btn-primary, .btn-secondary, .details-btn, .difficulty-btn, .answer-btn
     .character-grid {
         grid-template-columns: 1fr;
         padding: 1rem;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
 
     .details-content {
         padding: 1.5rem;
         margin: 1rem;
         max-height: 80vh;
+        max-width: calc(100vw - 2rem);
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
 
     .detail-name {
@@ -1370,6 +1379,11 @@ button, .btn-primary, .btn-secondary, .details-btn, .difficulty-btn, .answer-btn
     .character-card {
         transform: none !important;
         transition: box-shadow 0.3s ease;
+    }
+
+    /* Ensure pages don't interfere with swipe gestures */
+    .page {
+        touch-action: pan-y;
     }
 
     /* Reduce complex animations on mobile */

@@ -1200,24 +1200,66 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// TOUCH SWIPE FOR MOBILE
+// TOUCH SWIPE FOR MOBILE - FIXED TO NOT INTERFERE WITH SCROLLING
 let touchStartX = 0;
+let touchStartY = 0;
 let touchEndX = 0;
+let touchEndY = 0;
+let isScrolling = false;
 
 document.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+    isScrolling = false;
+}, { passive: true });
+
+document.addEventListener('touchmove', (e) => {
+    // Detect if user is scrolling vertically
+    const touch = e.changedTouches[0];
+    const deltaY = Math.abs(touch.screenY - touchStartY);
+    const deltaX = Math.abs(touch.screenX - touchStartX);
+    
+    // If vertical movement is greater than horizontal, it's scrolling
+    if (deltaY > deltaX && deltaY > 10) {
+        isScrolling = true;
+    }
 }, { passive: true });
 
 document.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    
+    // Don't handle swipe if user was scrolling
+    if (isScrolling) {
+        return;
+    }
+    
+    // Don't handle swipe if touch was on a scrollable element that was scrolling
+    const target = e.target;
+    const scrollableElement = target.closest('.details-content, .character-grid, .page');
+    if (scrollableElement) {
+        const hasVerticalScroll = scrollableElement.scrollHeight > scrollableElement.clientHeight;
+        if (hasVerticalScroll) {
+            // Check if the swipe is mostly vertical
+            const deltaY = Math.abs(touchEndY - touchStartY);
+            const deltaX = Math.abs(touchEndX - touchStartX);
+            if (deltaY > deltaX * 0.5) {
+                // Mostly vertical movement - likely scrolling
+                return;
+            }
+        }
+    }
+    
     handleSwipe();
 }, { passive: true });
 
 function handleSwipe() {
     const swipeThreshold = 50;
     const diff = touchStartX - touchEndX;
+    const deltaY = Math.abs(touchEndY - touchStartY);
 
-    if (Math.abs(diff) > swipeThreshold) {
+    // Only trigger if horizontal movement is significantly greater than vertical
+    if (Math.abs(diff) > swipeThreshold && Math.abs(diff) > deltaY * 1.5) {
         if (diff > 0) {
             // Swipe left - next page
             const currentPage = document.querySelector('.page.active');
