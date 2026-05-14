@@ -514,6 +514,9 @@ function showCharacterDetails(characterId) {
     // Play character sound
     playCharacterSound(characterId);
 
+    // Lock body scroll
+    document.body.classList.add('modal-open');
+
     // Show modal
     const modal = document.querySelector('.details-container');
     if (modal) {
@@ -535,6 +538,10 @@ function closeCharacterDetails() {
     if (modal) {
         modal.classList.remove('active');
     }
+    
+    // Unlock body scroll
+    document.body.classList.remove('modal-open');
+    
     currentCharacter = null;
 }
 
